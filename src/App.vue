@@ -1,10 +1,19 @@
 <template>
   <div id="app">
-    123 <el-button type="primary">主要按钮</el-button>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
 <style>
-
+  *{
+    margin:0;
+    padding:0;
+  }
+  ul,li,dl{
+    list-style: none;
+  }
+  a{
+    color:initial;
+    text-decoration: none;
+  }
 </style>
