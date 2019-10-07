@@ -10,6 +10,18 @@ import axios from 'axios'
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = "http://localhost:3000"  //设置基准路径
 
+router.beforeEach((to,from,next)=>{
+  if(to.path!=="/login"){
+    const token=JSON.parse(localStorage.getItem('user')||'{}').token;
+    if(token){
+      next()
+    }else{
+      next('/login')
+    }
+  }else{
+    next();
+  }
+})
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
