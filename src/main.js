@@ -21,6 +21,9 @@ router.beforeEach((to,from,next)=>{
   }else{
     next();
   }
+  if(to.path==='/'){
+    next('/index');
+  }
 })
 Vue.use(ElementUI)
 

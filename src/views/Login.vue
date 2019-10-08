@@ -55,7 +55,7 @@ export default {
                this.$message.success(message);
                localStorage.setItem('user',JSON.stringify(data));
                setTimeout(()=>{
-                 this.$router.push('/');
+                 this.$router.push('/index');
                },2000)
              }
            })
