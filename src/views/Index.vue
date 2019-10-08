@@ -11,7 +11,7 @@
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-       <el-menu-item index="1">
+        <el-menu-item index="1">
           <i class="el-icon-menu"></i>
           <span slot="title" @click="$router.push('/index')">首页</span>
         </el-menu-item>
@@ -23,9 +23,9 @@
           <el-menu-item index="2-1">
             <router-link to="/post-add">发布文章</router-link>
           </el-menu-item>
-          <el-menu-item index="2-2" >
-              <router-link to="/post-list">文章列表</router-link>
-              </el-menu-item>
+          <el-menu-item index="2-2">
+            <router-link to="/post-list">文章列表</router-link>
+          </el-menu-item>
         </el-submenu>
         <el-menu-item index="3">
           <i class="el-icon-menu"></i>
@@ -36,7 +36,10 @@
     <el-container>
       <el-header>
         <el-row class="user" type="flex" justify="end" align="middle">
-         <img :src="user.user.head_img?$axios.defaults.baseURL+user.user.head_img:'@/assets/img/pink.jpg'" alt="">
+          <img
+            :src="user.user.head_img?$axios.defaults.baseURL+user.user.head_img:'/img/pink.4c1174ca.jpg'"
+            alt
+          />
           <span>{{user.user.nickname}}</span>
           <span>{{user.user.username}}</span>
           <span>
@@ -45,6 +48,13 @@
         </el-row>
       </el-header>
       <el-main>
+          <div class="bread" v-if="routers!=='/index'">
+            <router-link
+              :to="item.path"
+              v-for="(item,index) in breadArr"
+              :key="index"
+            >{{item.meta}}{{index===breadArr.length-1?'':'/'}}</router-link>
+          </div>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -55,8 +65,23 @@
 export default {
   data() {
     return {
-      user: {}
+      user: { user: {} }
     };
+  },
+  computed: {
+    breadArr() {
+      let arr = [];
+      this.$route.matched.forEach((v, i) => {
+        let obj = {};
+        obj.meta = v.meta;
+        obj.path = v.path;
+        arr.push(obj);
+      });
+      return arr;
+    },
+    routers(){
+      return this.$route.path
+    }
   },
   mounted() {
     this.user = JSON.parse(localStorage.getItem("user"));
@@ -88,9 +113,9 @@ a:focus {
   background-color: #b3c0d1;
   color: #333;
   .user {
-      padding-top:20px;
-      box-sizing: border-box;
-      height:100%;
+    padding-top: 20px;
+    box-sizing: border-box;
+    height: 100%;
   }
   img {
     height: 48px;
@@ -100,10 +125,10 @@ a:focus {
   }
   span {
     margin-left: 20px;
-    margin-top:-20px;
+    margin-top: -20px;
     &:nth-last-of-type(1) {
       padding-bottom: 20px;
-      margin-top:0;
+      margin-top: 0;
     }
   }
 }
@@ -121,7 +146,7 @@ a:focus {
   width: 100%;
   background-color: #e9eef3;
   color: #333;
-    padding:0;
+  padding: 20px;
 }
 
 .el-container {
@@ -145,6 +170,12 @@ a:focus {
     color: #fff;
     font-size: 60px;
     text-align: center;
+  }
+}
+.bread {
+
+  a {
+    color: #000;
   }
 }
 </style>

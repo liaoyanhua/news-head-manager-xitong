@@ -1,7 +1,7 @@
 <template>
 <el-row  class="welcome" type="flex" justify="center" align="middle">
   <div>
-      <img :src="user.user.head_img?$axios.defaults.baseURL+user.user.head_img:'@/assets/img/pink.jpg'" alt="">
+      <img :src="user.user.head_img?$axios.defaults.baseURL+user.user.head_img:'/img/pink.4c1174ca.jpg'" alt="">
         <h1>Welcome to back !!!!!</h1>
   </div>
   </el-row>
@@ -11,7 +11,7 @@
 export default {
     data(){
         return{
-            user:{}
+             user:{ user: {} }
         }
     },
   mounted() {

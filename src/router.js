@@ -16,16 +16,11 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {path:'/login',component:Login},
-    {path:'/',component:Index,children:[
-      {path:'post-add',component:PostAdd},
-      {path:'index',component:Welcome},
-      {path:'post-list',component:PostList}
+    {path:'/',meta:'头条后台',component:Index,children:[
+      {path:'post-add',meta:'发布文章',component:PostAdd},
+      {path:'index',meta:'首页',component:Welcome},
+      {path:'post-list',meta:'文章列表',component:PostList}
     ]}
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: Home
-    // },
     // {
     //   path: '/about',
     //   name: 'about',
