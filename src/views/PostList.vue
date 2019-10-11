@@ -30,6 +30,12 @@
           <span style="margin-left: 10px">{{scope.row.open===1?'打开':'关闭'}}</span>
         </template>
       </el-table-column>
+      <el-table-column label="新闻类型" width="100">
+        <template slot-scope="scope">
+          <i class="el-icon-time"></i>
+          <span style="margin-left: 10px">{{ scope.row.type===1?'文章':'视频'}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="头像" width="100">
         <template slot-scope="scope">
           <span style="margin-left: 10px">
@@ -41,7 +47,7 @@
           </span>
         </template>
       </el-table-column>
-      <el-table-column label="作者" width="100">
+      <el-table-column label="作者" width="120">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
           <span style="margin-left: 10px">{{ scope.row.user.nickname}}</span>
@@ -75,7 +81,7 @@
       @current-change="handleCurrentChange"
       :current-page="pageIndex"
       :page-sizes="[5, 10, 15, 20]"
-      :page-size="10"
+      :page-size="5"
       layout="total, sizes, prev, pager, next, jumper"
       :total="totalPage"
     ></el-pagination>
@@ -98,6 +104,7 @@ export default {
     };
   },
   mounted() {
+    // this.handleSizeChange(val);
     if (!this.keyword) {
       this.getlist();
       this.$axios({
@@ -135,6 +142,7 @@ export default {
     //点编辑按钮时触发
     handleEdit(index, row) {
       console.log(index, row);
+      this.$router.push(`/post-edit/${row.id}`);
     },
     //点关闭按钮时触发
     handleDelete(index, row) {
@@ -184,8 +192,8 @@ export default {
       });
     },
     //失去焦点时触发
-    handleSearch(){
-        this.getSearchList();
+    handleSearch() {
+      this.getSearchList();
       this.$axios({
         url: `/post_search?keyword=${this.keyword}&pageIndex=${this.pageIndex}&pageSize=99999999`
       }).then(res => {

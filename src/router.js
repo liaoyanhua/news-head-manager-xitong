@@ -7,6 +7,7 @@ import Index from '@/views/Index'
 import PostAdd from '@/views/PostAdd'
 import Welcome from '@/views/Welcome'
 import PostList from '@/views/PostList'
+import PostEdit from '@/views/PostEdit'
 
 
 Vue.use(Router)
@@ -19,7 +20,8 @@ export default new Router({
     {path:'/',meta:'头条后台',component:Index,children:[
       {path:'post-add',meta:'发布文章',component:PostAdd},
       {path:'index',meta:'首页',component:Welcome},
-      {path:'post-list',meta:'文章列表',component:PostList}
+      {path:'post-list',meta:'文章列表',component:PostList},
+      {path:'post-edit/:id',meta:'编辑文章',component:PostEdit}
     ]}
     // {
     //   path: '/about',
